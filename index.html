@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoSphere - Enciclopedia y Catálogo Global de Vehículos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- CONTENEDOR GENERAL DE LA APLICACIÓN -->
+  <div class="app-layout">
+
+    <!-- BARRA LATERAL IZQUIERDA -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="#" class="logo" onclick="showSection('inicio')">Auto<span>Sphere</span></a>
+        <button class="menu-close" id="menuClose" aria-label="Cerrar Menú">✕</button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <!-- Enlaces principales -->
+        <a href="#" onclick="showSection('inicio')"> Inicio</a>
+        <a href="#" onclick="showSection('catalogo')"> Catálogo General</a>
+        <a href="#" onclick="showSection('comparador')"> Comparativa (<span id="compareCount">0</span>)</a>
+
+        <div class="sidebar-divider"></div>
+        
+        <span class="sidebar-category-title">CATEGORIAS</span>
+        
+        <!-- Contenedor 11 categorías principales -->
+        <div id="sidebarCategories" class="sidebar-categories-list"></div>
+      </nav>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL A LA DERECHA -->
+    <div class="main-content-wrapper">
+
+      <!-- ENCABEZADO MÓVIL  -->
+      <header class="mobile-header">
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menú">☰</button>
+        <a href="#" class="logo">Auto<span>Sphere</span></a>
+      </header>
+
+      <!-- CONTENEDOR DE VISTAS -->
+      <main class="main-container">
+
+        <!-- SECCIÓN: INICIO -->
+        <section id="sec-inicio" class="view-section active">
+          <div class="hero">
+            <h1>Enciclopedia Global de Vehículos</h1>
+            <p>Es una plataforma web creada con el propósito de reunir, organizar y presentar información sobre el mundo automotor en un solo lugar. Su objetivo principal es ofrecer a los usuarios un espacio donde puedan conocer, explorar y comparar los mejores vehículos de diferentes categorías, incluyendo automóviles, motocicletas, camionetas, vehículos comerciales, camiones de carga, tractocamiones, autobuses y maquinaria pesada.</p>
+            <div class="hero-actions">
+              <button class="btn-hero" onclick="showSection('catalogo')">Explorar Catálogo Completo</button>
+              <button class="btn-hero-outline" onclick="showSection('comparador')">Ir al Comparador</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECCIÓN: CATÁLOGO Y BUSCADOR/FILTROS -->
+        <section id="sec-catalogo" class="view-section">
+          <div class="section-title">
+            <h2 id="catalogTitle">Catálogo General</h2>
+            <p id="catalogSubtitle">Filtra por categoría, subcategoría, fabricante, potencia y tipo de combustible.</p>
+          </div>
+
+          <!-- PANEL DE BÚSQUEDA Y FILTROS -->
+          <div class="filter-panel">
+            <div class="search-box">
+              <input type="text" id="searchInput" placeholder="Buscar por marca, modelo, país..." oninput="applyFilters()">
+            </div>
+            
+            <div class="filter-grid">
+              <div class="filter-group">
+                <label>Categoría</label>
+                <select id="filterCategory" onchange="onCategoryFilterChange()">
+                  <option value="">Todas las Categorías</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label>Subcategoría</label>
+                <select id="filterSubcategory" onchange="applyFilters()">
+                  <option value="">Todas las Subcategorías</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label>Origen / Disponibilidad</label>
+                <select id="filterOrigin" onchange="applyFilters()">
+                  <option value="">Todos</option>
+                  <option value="Colombia">Disponible en Colombia</option>
+                  <option value="Internacional">Internacional / Importación</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label>Combustible / Propulsión</label>
+                <select id="filterFuel" onchange="applyFilters()">
+                  <option value="">Todos los tipos</option>
+                  <option value="Gasolina">Gasolina</option>
+                  <option value="Diésel">Diésel</option>
+                  <option value="Eléctrico">Eléctrico</option>
+                  <option value="Híbrido">Híbrido</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- GRILLA DE TARJETAS (RANKINGS TOP 5) -->
+          <div class="vehicle-grid" id="vehicleGrid">
+            <!-- Renderizado dinámico de tarjetas -->
+          </div>
+        </section>
+
+        <!-- SECCIÓN: FICHA TÉCNICA INDIVIDUAL -->
+        <section id="sec-ficha" class="view-section">
+          <button class="btn-back" onclick="showSection('catalogo')">← Volver al Catálogo</button>
+          <div id="fichaDetailContainer">
+            <!-- Renderizado dinámico de ficha completa -->
+          </div>
+        </section>
+
+        <!-- SECCIÓN: COMPARADOR DE VEHÍCULOS -->
+        <section id="sec-comparador" class="view-section">
+          <div class="section-title">
+            <h2>Comparador de Vehículos</h2>
+            <p>Selecciona 2 o más vehículos para contrastar sus especificaciones lado a lado.</p>
+          </div>
+
+          <div class="comparator-controls">
+            <button class="btn-clear" onclick="clearComparison()">Limpiar Comparación</button>
+          </div>
+
+          <div class="table-responsive" id="comparatorContainer">
+            <!-- Tabla comparativa dinámica -->
+          </div>
+        </section>
+
+      </main>
+
+      <!-- PIE DE PÁGINA -->
+      <footer>
+        <p>&copy; 2026 AutoSphere - Plataforma de Ingeniería y Clasificación Vehicular.</p>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
